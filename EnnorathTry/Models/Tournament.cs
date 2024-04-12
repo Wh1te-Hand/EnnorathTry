@@ -16,9 +16,10 @@ namespace EnnorathTry.Models
             set;
         }
 
+        public int CountPlayers
+        { get; }
         public string Type
         { get; }
-
         private DateOnly DateStart
         { get; }
         private DateOnly DateFinish
@@ -28,6 +29,7 @@ namespace EnnorathTry.Models
         {
             Name = name;
             Type = type;
+            CountPlayers = countPlayers;
 
             _matchesBook = new MatchesBook(countPlayers);
         }

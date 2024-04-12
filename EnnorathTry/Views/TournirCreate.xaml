@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="EnnorathTry.Views.TournirCreate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EnnorathTry.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="AntiqueWhite">
+        <Grid Margin="20 10 20 10" Grid.IsSharedSizeScope="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Create tournament" FontSize="24"  Margin="0 10 0 0"/>
+
+            <Grid Grid.Row="1" Margin="0 20 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Name" FontSize="20" Margin="0 0 0 0"/>
+                <TextBox Grid.Row="1" MinWidth="100" MaxWidth="200" HorizontalAlignment="Left" Text=" " Margin="0 5 0 0"/>
+            </Grid>
+
+            <Grid Grid.Row="2" Margin="0 20 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="FirstColumn"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="SecondColumn"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0"  Grid.Column="0" 
+                           Text="Type"
+                           FontSize="20"
+                           Margin="0 0 0 0"/>
+                
+                <TextBox Grid.Row="1" Grid.Column="0" 
+                         MinWidth="100" 
+                         MaxWidth="200" 
+                         HorizontalAlignment="Left" 
+                         Text=" " 
+                         Margin="0 5 0 0"/>
+                
+                <TextBlock Grid.Row="0"  Grid.Column="1" 
+                           Text="Count of players"
+                           FontSize="20"
+                           Margin="10 0 0 0"/>
+
+                <TextBox Grid.Row="1" Grid.Column="1" 
+                         MinWidth="100" 
+                         MaxWidth="200" 
+                         HorizontalAlignment="Left" 
+                         Text=" " 
+                         Margin="10 5 0 0"/>
+            </Grid>
+
+            <Grid Grid.Row="3" Margin="0 20 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="FirstColumn"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="SecondColumn"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0"  Grid.Column="0" 
+                           Text="Date start"
+                           FontSize="20"
+                           Margin="0 0 0 0"/>
+
+                <DatePicker Grid.Row="1" Grid.Column="0" 
+                         MinWidth="100" 
+                         MaxWidth="200" 
+                         HorizontalAlignment="Left" 
+                         SelectedDate=""
+                         Margin="0 5 0 0"/>
+
+                <TextBlock Grid.Row="0"  Grid.Column="1" 
+                           Text="Date finish"
+                           FontSize="20"
+                           Margin="10 0 0 0"/>
+
+                <DatePicker Grid.Row="1" Grid.Column="1" 
+                         MinWidth="100" 
+                         MaxWidth="200" 
+                         HorizontalAlignment="Left" 
+                         SelectedDate=""
+                         Margin="10 5 0 0"/>
+            </Grid>
+
+            <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0 20 0 0">
+                <Button Content="Create"/>
+                <Button Content="Cansel" Margin="5 0 0 0"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

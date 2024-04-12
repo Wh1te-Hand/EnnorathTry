@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EnnorathTry"
+        xmlns:views="clr-namespace:EnnorathTry.Views"
         mc:Ignorable="d"
-        Title="Tournament" Height="450" Width="800">
+        Title="Tournament" Height="450" Width="800" FontSize="14">
     <Window.Resources>
         <SolidColorBrush Color="LightGray" x:Key="buttonBrush1" />
         <ControlTemplate TargetType="Button" x:Key="btTemplate1">
@@ -22,8 +23,6 @@
         </ControlTemplate>
     </Window.Resources>
     <Grid>
-        <Button x:Name="myButton" Template="{DynamicResource btTemplate1}" Height="50" Width="100" Click="Button_Click" VerticalAlignment="Top">Hello</Button>
-        <Button x:Name="myButton2" Template="{DynamicResource btTemplate2}" Height="50" Width="100" Click="Button_Click" Background="{DynamicResource buttonBrush1}">Hello</Button>
-        <Button x:Name="myButton3"  Height="50" Width="100" Click="Button_Click" Background="{DynamicResource buttonBrush1}" VerticalAlignment="Bottom">Hello</Button>
+        <views:TournirList/>
     </Grid>
 </Window>
