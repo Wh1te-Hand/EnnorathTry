@@ -20,33 +20,40 @@
                 </Grid.ColumnDefinitions>
                 
                 <TextBlock Grid.Column="0" Text="Tournirs" FontSize="24"/>
-                <Button Grid.Column="1" Content="Create tournir" FontSize="20"/>
+                <Button Grid.Column="1" Content="Back to create tournament" FontSize="20" Command="{Binding BackToTournir}"/>
             </Grid>
 
-            <ListView Grid.Row="1"  Margin="0 25 0 0">
-                <ListItem/>
+            <ListView Grid.Row="1"  Margin="0 25 0 0" ItemsSource="{Binding Tournaments}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID" >
                             <GridViewColumn.CellTemplate >
                                 <DataTemplate >
-                                    <TextBlock Padding="0 0 20 0" Text="1" />
+                                    <TextBlock Padding="0 0 20 0" Text="1" /> <!--smdb-->
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                        </GridViewColumn> 
                         
                         <GridViewColumn Header="Name">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Padding="0 0 20 0" Text="Elzegida"/>
+                                    <TextBlock Padding="0 0 20 0" Text="{Binding Name}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        
+
+                        <GridViewColumn Header="Count of players">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Padding="0 0 20 0" Text="{Binding CountPlayers}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
                         <GridViewColumn Header="Start">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Padding="0 0 20 0" Text="10.10.2020"/>
+                                    <TextBlock Padding="0 0 20 0" Text="{Binding DateStart}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -54,7 +61,7 @@
                         <GridViewColumn Header="Finish">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Padding="0 0 20 0" Text="10.10.2021"/>
+                                    <TextBlock Padding="0 0 20 0" Text="{Binding DateFinish}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

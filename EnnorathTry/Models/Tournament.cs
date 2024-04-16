@@ -20,16 +20,18 @@ namespace EnnorathTry.Models
         { get; }
         public string Type
         { get; }
-        private DateOnly DateStart
+        public DateOnly DateStart
         { get; }
-        private DateOnly DateFinish
+        public DateOnly DateFinish
         { get; set; }
 
-        public Tournament(string name, string type, int countPlayers)
+        public Tournament(string name, string type, int countPlayers, DateOnly start, DateOnly finish)
         {
             Name = name;
             Type = type;
             CountPlayers = countPlayers;
+            DateStart = start;
+            DateFinish = finish;
 
             _matchesBook = new MatchesBook(countPlayers);
         }

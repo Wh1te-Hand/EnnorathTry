@@ -23,6 +23,6 @@
         </ControlTemplate>
     </Window.Resources>
     <Grid>
-        <views:TournirList/>
+        <views:TournirCreate DataContext="{Binding CurrentModel}"/>
     </Grid>
 </Window>
