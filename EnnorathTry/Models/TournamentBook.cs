@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EnnorathTry.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,11 @@ namespace EnnorathTry.Models
         public TournamentBook()
         {
             _tournamentBook = new List<Tournament>();
+        }
+
+        public void AddTournament(Tournament tournament)
+        {
+            _tournamentBook.Add(tournament); //memoryException?+ check if i need unique tournament every time
         }
     }
 }

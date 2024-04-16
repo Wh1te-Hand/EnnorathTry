@@ -22,7 +22,8 @@ namespace EnnorathTry.ViewModels
 
             _tournaments.Add(new TournamentVMhelp(new Tournament("Manya", "solo", 8, DateOnly.FromDateTime(DateTime.Now), DateOnly.FromDateTime(DateTime.Now))));
             _tournaments.Add(new TournamentVMhelp(new Tournament("Badya", "solo", 8, DateOnly.FromDateTime(DateTime.Now), DateOnly.FromDateTime(DateTime.Now))));
-            
+
+            BackToTournir = new NavigateCommand();
         }
     }
 }

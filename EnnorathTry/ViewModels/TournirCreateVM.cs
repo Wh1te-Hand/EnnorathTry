@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EnnorathTry.Commands;
+using EnnorathTry.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,7 +53,7 @@ namespace EnnorathTry.ViewModels
             }
         }
 
-        private DateTime _startDate;
+        private DateTime _startDate=new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
         public DateTime DateStart 
         {
             get
@@ -65,7 +67,7 @@ namespace EnnorathTry.ViewModels
             }
         }
 
-        private DateTime _dateFinish;
+        private DateTime _dateFinish = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1);
         public DateTime DateFinish
         {
             get
@@ -83,9 +85,10 @@ namespace EnnorathTry.ViewModels
 
         public ICommand Cancel { get; }
 
-        public TournirCreateVM()
-        { 
-        
+        public TournirCreateVM(TournamentBook tourBook)
+        {
+            Create = new AddTournamentCommand(this, tourBook);
+            Cancel = new CancelCommand();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EnnorathTry.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,9 @@ namespace EnnorathTry.ViewModels
     {
         public VMBase CurrentModel { get;}
 
-        public MainWindowVM()
+        public MainWindowVM(TournamentBook tourBook)
         { 
-            CurrentModel = new TournirCreateVM();
+            CurrentModel = new TournirCreateVM(tourBook);
         }
     }
 }
