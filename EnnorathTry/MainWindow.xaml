@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EnnorathTry"
         xmlns:views="clr-namespace:EnnorathTry.Views"
+        xmlns:vmdl="clr-namespace:EnnorathTry.ViewModels"
         mc:Ignorable="d"
         Title="Tournament" Height="450" Width="800" FontSize="14">
     <Window.Resources>
@@ -23,6 +24,19 @@
         </ControlTemplate>
     </Window.Resources>
     <Grid>
-        <views:TournirCreate DataContext="{Binding CurrentModel}"/>
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type vmdl:StartPageVM}">
+                <views:StartPage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vmdl:TournirCreateVM}">
+                <views:TournirCreate/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vmdl:TournirListVM}">
+                <views:TournirList/>
+            </DataTemplate>
+        </Grid.Resources>
+
+        <ContentControl Content="{Binding CurrentViewModel}"/>
+
     </Grid>
 </Window>

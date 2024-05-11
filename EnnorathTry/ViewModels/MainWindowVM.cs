@@ -1,4 +1,5 @@
 ﻿using EnnorathTry.Models;
+using EnnorathTry.Stores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,20 @@ namespace EnnorathTry.ViewModels
 {
     public class MainWindowVM:VMBase
     {
-        public VMBase CurrentModel { get;}
+        private readonly NavigationStore _navigationStore;
 
-        public MainWindowVM(TournamentBook tourBook)
+        public VMBase CurrentViewModel { get=>_navigationStore.CurrentViewModel;}
+
+        public MainWindowVM(NavigationStore navigationStore)
         { 
-            CurrentModel = new TournirCreateVM(tourBook);
+            _navigationStore = navigationStore;
+
+            _navigationStore.CurrentViewModelChanged +=OnCurrentViewModelChanged;
+        }
+
+        private void OnCurrentViewModelChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel));
         }
     }
 }

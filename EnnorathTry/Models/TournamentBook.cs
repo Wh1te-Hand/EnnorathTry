@@ -19,5 +19,13 @@ namespace EnnorathTry.Models
         {
             _tournamentBook.Add(tournament); //memoryException?+ check if i need unique tournament every time
         }
+
+        public List<Tournament> GetTournaments()
+        {
+            if (_tournamentBook.Count != 0)
+                return _tournamentBook;
+            else
+                return null;
+        }
     }
 }

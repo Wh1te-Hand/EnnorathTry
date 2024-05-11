@@ -1,4 +1,5 @@
 ﻿using EnnorathTry.Models;
+using EnnorathTry.Services;
 using EnnorathTry.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,13 @@ namespace EnnorathTry.Commands
     public class AddTournamentCommand : CommandBase
     {
         private readonly TournamentBook _tourBook;
+        private readonly NavigationService _navigationService;
         private readonly TournirCreateVM _tourCreateVM;
-        public AddTournamentCommand(TournirCreateVM tourCreateVM, TournamentBook tourBook) 
+        public AddTournamentCommand(TournirCreateVM tourCreateVM, TournamentBook tourBook, NavigationService navigationService) 
         {
             _tourBook = tourBook;
-            _tourCreateVM= tourCreateVM;
+            _navigationService = navigationService;
+            _tourCreateVM = tourCreateVM;
 
             _tourCreateVM.PropertyChanged += OnViewModelPropertyChanged;
         }
@@ -35,6 +38,7 @@ namespace EnnorathTry.Commands
                 DateOnly.FromDateTime(_tourCreateVM.DateFinish)
                 );
             _tourBook.AddTournament(tournament);
+            _navigationService.Navigate();
         }
         private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
