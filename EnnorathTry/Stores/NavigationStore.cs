@@ -16,6 +16,7 @@ namespace EnnorathTry.Stores
             get => _currentViewModel;
             set
             {
+                _currentViewModel?.Dispose();
                 _currentViewModel = value; //add something useful
                 OnCurrentViewModelChanged();
             }

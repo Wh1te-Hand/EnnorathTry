@@ -1,4 +1,5 @@
 ﻿using EnnorathTry.Models;
+using EnnorathTry.Stores;
 using EnnorathTry.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,15 @@ namespace EnnorathTry.Commands
 {
     public class LoadTournamentCommand : AsyncCommandBase
     {
-        private readonly TournamentBook _tournamentBook;
+        private readonly TournamentStore _tournamentStore;
         private readonly TournirListVM _tournirListVM;
         public override async Task ExecuteAsync(object param)
         {
             try
-            { 
-                IEnumerable<Tournament> tournaments = await _tournamentBook.GetTournaments();
-                _tournirListVM.UpdateList(tournaments);
+            {
+                // IEnumerable<Tournament> tournaments = await _tournamentBook.GetTournaments();
+                await _tournamentStore.Load();
+                _tournirListVM.UpdateList(_tournamentStore.Tournaments);
             }
             catch(Exception ex)
             {
@@ -28,9 +30,9 @@ namespace EnnorathTry.Commands
             }
         }
 
-        public LoadTournamentCommand(TournirListVM tournamentList,TournamentBook tournamentBook)
+        public LoadTournamentCommand(TournirListVM tournamentList,TournamentStore tournamentStore)
         { 
-            _tournamentBook = tournamentBook;
+            _tournamentStore = tournamentStore;
             _tournirListVM = tournamentList;
         }
     }

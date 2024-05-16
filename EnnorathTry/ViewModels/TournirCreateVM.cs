@@ -1,6 +1,7 @@
 ﻿using EnnorathTry.Commands;
 using EnnorathTry.Models;
 using EnnorathTry.Services;
+using EnnorathTry.Stores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,9 +87,9 @@ namespace EnnorathTry.ViewModels
         public ICommand Cancel { get; }
         public ICommand GoToList { get; }
 
-        public TournirCreateVM(TournamentBook tourBook,  NavigationService tournirListNavService)
+        public TournirCreateVM(TournamentStore tourStore,  NavigationService tournirListNavService)
         {
-            Create = new AddTournamentCommand(this, tourBook, tournirListNavService);
+            Create = new AddTournamentCommand(this, tourStore, tournirListNavService);
             Cancel = new CancelCommand();
 
             GoToList = new NavigateCommand(tournirListNavService);

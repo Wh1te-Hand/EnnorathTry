@@ -1,5 +1,6 @@
 ﻿using EnnorathTry.Models;
 using EnnorathTry.Services;
+using EnnorathTry.Stores;
 using EnnorathTry.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,12 @@ namespace EnnorathTry.Commands
 {
     public class AddTournamentCommand : AsyncCommandBase
     {
-        private readonly TournamentBook _tourBook;
+        private readonly TournamentStore _tourStore;
         private readonly NavigationService _navigationService;
         private readonly TournirCreateVM _tourCreateVM;
-        public AddTournamentCommand(TournirCreateVM tourCreateVM, TournamentBook tourBook, NavigationService navigationService) 
+        public AddTournamentCommand(TournirCreateVM tourCreateVM, TournamentStore tourStore, NavigationService navigationService) 
         {
-            _tourBook = tourBook;
+            _tourStore=tourStore;
             _navigationService = navigationService;
             _tourCreateVM = tourCreateVM;
 
@@ -41,7 +42,8 @@ namespace EnnorathTry.Commands
 
             try
             {
-             await _tourBook.AddTournament(tournament);
+            // await _tourBook.AddTournament(tournament);
+            await _tourStore.CreateTournament( tournament );
                 _navigationService.Navigate();
             }
             catch (Exception ex) 

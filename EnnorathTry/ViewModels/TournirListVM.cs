@@ -1,6 +1,7 @@
 ﻿using EnnorathTry.Commands;
 using EnnorathTry.Models;
 using EnnorathTry.Services;
+using EnnorathTry.Stores;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,20 +16,22 @@ namespace EnnorathTry.ViewModels
     {
         private readonly ObservableCollection<TournamentVMhelp> _tournaments;
         //private TournamentBook _tourBook;
+        private TournamentStore _tourStore;
         public IEnumerable<TournamentVMhelp> Tournaments => _tournaments;
         public ICommand BackToTournir { get; }
         public ICommand LoadTournaments { get; }
 
-        public TournirListVM(TournamentBook tourBook, NavigationService tournirCreateNavService) // can be changed to be need VMclass to display
+        public TournirListVM(TournamentStore tourStore, NavigationService tournirCreateNavService) // can be changed to be need VMclass to display
         { 
             _tournaments=new ObservableCollection<TournamentVMhelp>();
+            _tourStore=tourStore;
            // _tourBook=tourBook;
 /*
             _tournaments.Add(new TournamentVMhelp(new Tournament("Manya", "solo", 8, DateOnly.FromDateTime(DateTime.Now), DateOnly.FromDateTime(DateTime.Now))));
             _tournaments.Add(new TournamentVMhelp(new Tournament("Badya", "solo", 8, DateOnly.FromDateTime(DateTime.Now), DateOnly.FromDateTime(DateTime.Now))));
 */
             BackToTournir = new NavigateCommand(tournirCreateNavService);
-            LoadTournaments = new LoadTournamentCommand(this, tourBook);
+            LoadTournaments = new LoadTournamentCommand(this, tourStore);
 
 /*            if ((_tourBook.GetTournaments())!=null) // our update function
                 UpdateList();
@@ -37,9 +40,9 @@ namespace EnnorathTry.ViewModels
 */
         }
 
-        public static TournirListVM LoadListViewModel(TournamentBook tourBook, NavigationService tournirCreateNavService)
+        public static TournirListVM LoadListViewModel(TournamentStore tourStore, NavigationService tournirCreateNavService)
         {
-            TournirListVM newListViewModel = new TournirListVM(tourBook,tournirCreateNavService);
+            TournirListVM newListViewModel = new TournirListVM(tourStore,tournirCreateNavService);
             newListViewModel.LoadTournaments.Execute(null);
             return newListViewModel;
         }
@@ -55,5 +58,12 @@ namespace EnnorathTry.ViewModels
                 id++;
             }
         }
+
+        public override void Dispose()
+        {
+            // unsubscribe from events so that there is no memory leak
+            base.Dispose();
+        }
+
     }
 }

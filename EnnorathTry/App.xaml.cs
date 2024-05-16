@@ -24,6 +24,7 @@ namespace EnnorathTry
     {
         private const String CONNECTION_STRING = "Data Source=tournament.db";
         private readonly TournamentBook _tourBook;
+        private readonly TournamentStore _tourStore;
         private readonly TournamentDBContextFactory _dbContext;
         private readonly NavigationStore _navigationStore;
         public App()
@@ -35,7 +36,7 @@ namespace EnnorathTry
             ITournamentValidator tourValidator = new DatabaseTournamentValidator(_dbContext);
 
             _tourBook = new TournamentBook(tourProvider,tourCreator,tourValidator);
-            
+            _tourStore = new TournamentStore(_tourBook);
             _navigationStore = new NavigationStore();
         }
         protected override void OnStartup(StartupEventArgs e)
@@ -60,12 +61,12 @@ namespace EnnorathTry
         // also add navigation on start page
         private TournirListVM CreateTournirListVM() // Where do we want to go
         {
-            return TournirListVM.LoadListViewModel(_tourBook, new NavigationService(_navigationStore, CreateTournirCreateVM));
+            return TournirListVM.LoadListViewModel(_tourStore, new NavigationService(_navigationStore, CreateTournirCreateVM));
         }
 
         private TournirCreateVM CreateTournirCreateVM() 
         {
-            return new TournirCreateVM(_tourBook, new NavigationService(_navigationStore, CreateTournirListVM));   
+            return new TournirCreateVM(_tourStore, new NavigationService(_navigationStore, CreateTournirListVM));   
         }
     }
 }
