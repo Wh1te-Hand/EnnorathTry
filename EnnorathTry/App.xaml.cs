@@ -1,7 +1,12 @@
-﻿using EnnorathTry.Models;
+﻿using EnnorathTry.DataBaseContext;
+using EnnorathTry.Models;
 using EnnorathTry.Services;
+using EnnorathTry.Services.DatabaseValidators;
+using EnnorathTry.Services.TournamentCreators;
+using EnnorathTry.Services.TournamentProvider;
 using EnnorathTry.Stores;
 using EnnorathTry.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,17 +22,32 @@ namespace EnnorathTry
     /// </summary>
     public partial class App : Application
     {
+        private const String CONNECTION_STRING = "Data Source=tournament.db";
         private readonly TournamentBook _tourBook;
+        private readonly TournamentDBContextFactory _dbContext;
         private readonly NavigationStore _navigationStore;
         public App()
-        { 
-            _tourBook = new TournamentBook();
+        {
+            _dbContext = new TournamentDBContextFactory(CONNECTION_STRING);
+
+            ITournamentCreator tourCreator= new DatabaseTournamentCreator(_dbContext);
+            ITournamentProvider tourProvider = new DatabaseTournamentProvider(_dbContext);
+            ITournamentValidator tourValidator = new DatabaseTournamentValidator(_dbContext);
+
+            _tourBook = new TournamentBook(tourProvider,tourCreator,tourValidator);
+            
             _navigationStore = new NavigationStore();
         }
         protected override void OnStartup(StartupEventArgs e)
         {
-            _navigationStore.CurrentViewModel = CreateTournirListVM(); 
+            //DbContextOptions options = new DbContextOptionsBuilder().UseSqlite(CONNECTION_STRING).Options;
+/*            using (TournamentTestDbContext dbContext = _dbContext.CreateDbContext())
+            {
+                dbContext.Database.Migrate();
+            }*/
 
+
+            _navigationStore.CurrentViewModel = CreateTournirListVM();
             MainWindow = new MainWindow()
             {
                 DataContext = new MainWindowVM(_navigationStore)
@@ -40,7 +60,7 @@ namespace EnnorathTry
         // also add navigation on start page
         private TournirListVM CreateTournirListVM() // Where do we want to go
         {
-            return new TournirListVM(_tourBook, new NavigationService(_navigationStore, CreateTournirCreateVM));
+            return TournirListVM.LoadListViewModel(_tourBook, new NavigationService(_navigationStore, CreateTournirCreateVM));
         }
 
         private TournirCreateVM CreateTournirCreateVM() 

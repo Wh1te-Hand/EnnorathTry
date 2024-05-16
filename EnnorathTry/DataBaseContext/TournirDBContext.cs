@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EnnorathTry.DTOs;
+using EnnorathTry.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,12 @@ using System.Threading.Tasks;
 
 namespace EnnorathTry.DataBaseContext
 {
-    public class TournirDBContext: DbContext
+    public class TournirDBContext//: DbContext
     {
-
+/*
+        public TournirDBContext(DbContextOptions options) : base(options)
+        {            
+        }
+        public DbSet<TournamentDTO> Tournaments { get; set; }*/
     }
 }

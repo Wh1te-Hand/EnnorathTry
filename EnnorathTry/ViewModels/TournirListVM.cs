@@ -14,34 +14,45 @@ namespace EnnorathTry.ViewModels
     public class TournirListVM: VMBase
     {
         private readonly ObservableCollection<TournamentVMhelp> _tournaments;
-        private TournamentBook _tourBook;
+        //private TournamentBook _tourBook;
         public IEnumerable<TournamentVMhelp> Tournaments => _tournaments;
         public ICommand BackToTournir { get; }
+        public ICommand LoadTournaments { get; }
 
         public TournirListVM(TournamentBook tourBook, NavigationService tournirCreateNavService) // can be changed to be need VMclass to display
         { 
             _tournaments=new ObservableCollection<TournamentVMhelp>();
-            _tourBook=tourBook;
+           // _tourBook=tourBook;
 /*
             _tournaments.Add(new TournamentVMhelp(new Tournament("Manya", "solo", 8, DateOnly.FromDateTime(DateTime.Now), DateOnly.FromDateTime(DateTime.Now))));
             _tournaments.Add(new TournamentVMhelp(new Tournament("Badya", "solo", 8, DateOnly.FromDateTime(DateTime.Now), DateOnly.FromDateTime(DateTime.Now))));
 */
             BackToTournir = new NavigateCommand(tournirCreateNavService);
-            if ((_tourBook.GetTournaments())!=null)
+            LoadTournaments = new LoadTournamentCommand(this, tourBook);
+
+/*            if ((_tourBook.GetTournaments())!=null) // our update function
                 UpdateList();
             else
                 _tournaments.Add(new TournamentVMhelp(new Tournament("empty", "empty", 0, DateOnly.FromDateTime(DateTime.Now), DateOnly.FromDateTime(DateTime.Now))));
-
+*/
         }
 
-        private void UpdateList()
+        public static TournirListVM LoadListViewModel(TournamentBook tourBook, NavigationService tournirCreateNavService)
+        {
+            TournirListVM newListViewModel = new TournirListVM(tourBook,tournirCreateNavService);
+            newListViewModel.LoadTournaments.Execute(null);
+            return newListViewModel;
+        }
+
+        public void UpdateList(IEnumerable<Tournament> tournaments)
         {
             _tournaments.Clear();
-
-            foreach (Tournament item in _tourBook.GetTournaments())
+            int id = 1;
+            foreach (Tournament item in tournaments)
             { 
-                TournamentVMhelp tournirCreateVM=new TournamentVMhelp(item);
+                TournamentVMhelp tournirCreateVM=new TournamentVMhelp(item,id);
                 _tournaments.Add(tournirCreateVM);
+                id++;
             }
         }
     }

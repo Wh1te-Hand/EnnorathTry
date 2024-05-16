@@ -7,10 +7,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace EnnorathTry.Commands
 {
-    public class AddTournamentCommand : CommandBase
+    public class AddTournamentCommand : AsyncCommandBase
     {
         private readonly TournamentBook _tourBook;
         private readonly NavigationService _navigationService;
@@ -28,7 +29,7 @@ namespace EnnorathTry.Commands
         {
             return !string.IsNullOrEmpty(_tourCreateVM.TournirName) && !string.IsNullOrEmpty(_tourCreateVM.Count) && base.CanExecute(param);
         }
-        public override void Execute(object param)
+        public override async Task ExecuteAsync(object param)
         {
             Tournament tournament = new Tournament(
                 _tourCreateVM.TournirName,
@@ -37,8 +38,17 @@ namespace EnnorathTry.Commands
                 DateOnly.FromDateTime(_tourCreateVM.DateStart),
                 DateOnly.FromDateTime(_tourCreateVM.DateFinish)
                 );
-            _tourBook.AddTournament(tournament);
-            _navigationService.Navigate();
+
+            try
+            {
+             await _tourBook.AddTournament(tournament);
+                _navigationService.Navigate();
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show($"Something wrong {ex}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
         private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
@@ -46,8 +56,6 @@ namespace EnnorathTry.Commands
             { 
                 OnCanExecuteChanged();
             }
-
-
         }
     }
 }

@@ -16,16 +16,18 @@ namespace EnnorathTry.Models
             set;
         }
 
+        public int Id
+        { get; }
         public int CountPlayers
         { get; }
-        public string Type
+        public string Type //can be changrd
         { get; }
         public DateOnly DateStart
         { get; }
         public DateOnly DateFinish
         { get; set; }
 
-        public Tournament(string name, string type, int countPlayers, DateOnly start, DateOnly finish)
+        public Tournament(string name, string type, int countPlayers, DateOnly start, DateOnly finish, int id=1)
         {
             Name = name;
             Type = type;
@@ -34,6 +36,17 @@ namespace EnnorathTry.Models
             DateFinish = finish;
 
             _matchesBook = new MatchesBook(countPlayers);
+            Id = id;
+        }
+
+        public bool Conflict(Tournament tournament)
+        { 
+            if(tournament.Name!=Name)
+            {
+                return false;
+            }
+
+            return tournament.DateStart < DateFinish && tournament.DateFinish > DateStart;
         }
 
     }
