@@ -3,9 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:EnnorathTry.Views"
+             xmlns:local="clr-namespace:EnnorathTry.Views" xmlns:Converters="clr-namespace:EnnorathTry.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Converters:ListTournamentLoading x:Key="ListTournamentLoading"></Converters:ListTournamentLoading>
+    </UserControl.Resources>
     <Grid Background="AntiqueWhite">
         <Grid Margin="20 10 20 10">
             <Grid.RowDefinitions>
@@ -23,51 +26,54 @@
                 <Button Grid.Column="1" Content="Back to create tournament" FontSize="20" Command="{Binding BackToTournir}"/>
             </Grid>
 
-            <ListView Grid.Row="1"  Margin="0 25 0 0" ItemsSource="{Binding Tournaments}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="ID" >
-                            <GridViewColumn.CellTemplate >
-                                <DataTemplate >
-                                    <TextBlock Padding="0 0 20 0" Text="{Binding Id}" /> <!--smdb-->
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn> 
-                        
-                        <GridViewColumn Header="Name">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Padding="0 0 20 0" Text="{Binding Name}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+            <Grid Grid.Row="1"  Margin="0 25 0 0">
+                <ListView  ItemsSource="{Binding Tournaments}" Visibility="{Binding IsLoading, Converter={StaticResource ListTournamentLoading}}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" >
+                                <GridViewColumn.CellTemplate >
+                                    <DataTemplate >
+                                        <TextBlock Padding="0 0 20 0" Text="{Binding Id}" />
+                                        <!--smdb-->
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
-                        <GridViewColumn Header="Count of players">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Padding="0 0 20 0" Text="{Binding CountPlayers}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                            <GridViewColumn Header="Name">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="0 0 20 0" Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
-                        <GridViewColumn Header="Start">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Padding="0 0 20 0" Text="{Binding DateStart}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                         
-                        <GridViewColumn Header="Finish">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Padding="0 0 20 0" Text="{Binding DateFinish}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+                            <GridViewColumn Header="Count of players">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="0 0 20 0" Text="{Binding CountPlayers}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Start">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="0 0 20 0" Text="{Binding DateStart}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Finish">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="0 0 20 0" Text="{Binding DateFinish}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
 
         </Grid>
 

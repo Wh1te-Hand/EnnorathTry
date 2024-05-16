@@ -18,6 +18,20 @@ namespace EnnorathTry.ViewModels
         //private TournamentBook _tourBook;
         private TournamentStore _tourStore;
         public IEnumerable<TournamentVMhelp> Tournaments => _tournaments;
+
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get 
+            {
+                return _isLoading;
+            }
+            set 
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+            }
+        }
         public ICommand BackToTournir { get; }
         public ICommand LoadTournaments { get; }
 

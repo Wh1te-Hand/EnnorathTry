@@ -18,16 +18,21 @@ namespace EnnorathTry.Commands
         private readonly TournirListVM _tournirListVM;
         public override async Task ExecuteAsync(object param)
         {
+            _tournirListVM.IsLoading = true;
+
             try
             {
                 // IEnumerable<Tournament> tournaments = await _tournamentBook.GetTournaments();
                 await _tournamentStore.Load();
                 _tournirListVM.UpdateList(_tournamentStore.Tournaments);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"Something bad in loading, {ex}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            
+             _tournirListVM.IsLoading=false;
+            
         }
 
         public LoadTournamentCommand(TournirListVM tournamentList,TournamentStore tournamentStore)
