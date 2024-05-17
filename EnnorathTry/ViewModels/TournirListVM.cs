@@ -39,6 +39,7 @@ namespace EnnorathTry.ViewModels
         { 
             _tournaments=new ObservableCollection<TournamentVMhelp>();
             _tourStore=tourStore;
+           // _isLoading=false;
            // _tourBook=tourBook;
 /*
             _tournaments.Add(new TournamentVMhelp(new Tournament("Manya", "solo", 8, DateOnly.FromDateTime(DateTime.Now), DateOnly.FromDateTime(DateTime.Now))));

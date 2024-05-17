@@ -26,8 +26,10 @@ namespace EnnorathTry.Services.TournamentProvider
             {
                 IEnumerable<DTOs.TournamentDTO> tournamentsDTOs= await context.Tournaments.ToListAsync();
                 if (tournamentsDTOs != null)
-                   // return tournamentsDTOs.Select(r => new Tournament(r.Name, r.Type, r.CountPlayers, r.DateStart, r.DateFinish, r.Id));//int.Parse(r.Id.ToString())));
-                  return tournamentsDTOs.Select(r => new Tournament(r.Name, r.Type, r.CountPlayers, r.DateStart, r.DateFinish));
+                { // return tournamentsDTOs.Select(r => new Tournament(r.Name, r.Type, r.CountPlayers, r.DateStart, r.DateFinish, r.Id));//int.Parse(r.Id.ToString())));
+                    await Task.Delay(2000);  
+                    return tournamentsDTOs.Select(r => new Tournament(r.Name, r.Type, r.CountPlayers, r.DateStart, r.DateFinish));
+                }
                 else
                     return null;
             }

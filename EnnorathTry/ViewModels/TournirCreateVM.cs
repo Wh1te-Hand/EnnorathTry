@@ -91,7 +91,6 @@ namespace EnnorathTry.ViewModels
         {
             Create = new AddTournamentCommand(this, tourStore, tournirListNavService);
             Cancel = new CancelCommand();
-
             GoToList = new NavigateCommand(tournirListNavService);
         }
     }
