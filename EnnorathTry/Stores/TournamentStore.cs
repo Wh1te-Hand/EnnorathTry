@@ -10,7 +10,7 @@ namespace EnnorathTry.Stores
     public class TournamentStore
     {
         private readonly TournamentBook _tournamentBook;
-        private readonly Lazy<Task> _initializeLazy;
+        private Lazy<Task> _initializeLazy;
         private List<Tournament> _tournaments;
         public IEnumerable<Tournament> Tournaments => _tournaments;
 
@@ -25,7 +25,16 @@ namespace EnnorathTry.Stores
 
         public async Task Load()
         {
-            await _initializeLazy.Value;
+            try
+            {
+                await _initializeLazy.Value;
+            }
+            catch(Exception)
+            {
+                _initializeLazy = new Lazy<Task>(Initialize);
+                throw;
+            }
+            
         }
 
         public async Task CreateTournament(Tournament tournament)
