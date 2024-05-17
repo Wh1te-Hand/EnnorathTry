@@ -9,7 +9,19 @@
         mc:Ignorable="d"
         Title="Tournament" Height="450" Width="800" FontSize="14">
     <Window.Resources>
-        
+        <SolidColorBrush Color="LightGray" x:Key="buttonBrush1" />
+        <ControlTemplate TargetType="Button" x:Key="btTemplate1">
+            <Border CornerRadius="25" BorderBrush="YellowGreen" BorderThickness="2"
+                    Background="YellowGreen" Height="50" Width="100" >
+                <ContentControl Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Hello" />
+            </Border>
+        </ControlTemplate>
+        <ControlTemplate TargetType="Button" x:Key="btTemplate2">
+            <Border CornerRadius="25" BorderBrush="Aqua" BorderThickness="2"
+                     Height="50" Width="100" >
+                <ContentControl Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Hello" />
+            </Border>
+        </ControlTemplate>
     </Window.Resources>
     <Grid>
         <Grid.Resources>
